@@ -1,7 +1,10 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# Get project root directory (one level up from data-mining/)
+PROJECT_ROOT = Path(__file__).parent.parent
+load_dotenv(PROJECT_ROOT / '.env')
 
 # GitHub API
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
@@ -11,13 +14,13 @@ if not GITHUB_TOKEN:
 # Search criteria
 LANGUAGE = "Java"
 MIN_STARS = 100  
-MAX_REPOS = 10  
+MAX_REPOS = 10
 BUG_FIX_KEYWORDS = ["fix", "bug", "issue", "error", "crash", "patch"]
 
-# Local storage
-DATA_DIR = "data"
-REPOS_DIR = os.path.join(DATA_DIR, "repos")
-PROCESSED_DATA_DIR = os.path.join(DATA_DIR, "processed")
+# Local storage - ABSOLUTE PATHS
+DATA_DIR = PROJECT_ROOT / "data"
+REPOS_DIR = DATA_DIR / "repos"
+PROCESSED_DATA_DIR = DATA_DIR / "processed"
 
 # File filters (only analyze Java files)
 FILE_EXTENSIONS = [".java"]
